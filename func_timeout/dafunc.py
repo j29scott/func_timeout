@@ -30,7 +30,7 @@ from functools import wraps
 __all__ = ('func_timeout', 'func_set_timeout')
 
 
-def func_timeout(timeout, func, args=(), kwargs=None):
+def func_timeout(timeout, func, args=(), kwargs=None, verbose=False):
     '''
         func_timeout - Runs the given function for up to #timeout# seconds.
 
@@ -44,6 +44,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
 
         @param kwargs  <dict/None> - Keyword arguments to pass to the function.
 
+        @param verbose <bool> - print exception
 
         @raises - FunctionTimedOut if #timeout# is exceeded, otherwise anything #func# could raise will be raised
 
@@ -98,7 +99,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         stopException = FunctionTimedOutTemp
         thread._stopThread(stopException)
         thread.join(min(.1, timeout / 50.0))
-        raise FunctionTimedOut('', timeout, func, args, kwargs)
+        raise FunctionTimedOut('', timeout, func, args, kwargs, verbose)
     else:
         # We can still cleanup the thread here..
         # Still give a timeout... just... cuz..

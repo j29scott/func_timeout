@@ -24,7 +24,7 @@ class FunctionTimedOut(BaseException):
     '''
 
 
-    def __init__(self, msg='', timedOutAfter=None, timedOutFunction=None, timedOutArgs=None, timedOutKwargs=None):
+    def __init__(self, msg='', timedOutAfter=None, timedOutFunction=None, timedOutArgs=None, timedOutKwargs=None, verbose=False):
         '''
             __init__ - Create this exception type.
 
@@ -48,7 +48,7 @@ class FunctionTimedOut(BaseException):
         self.timedOutArgs = timedOutArgs
         self.timedOutKwargs = timedOutKwargs
 
-        if not msg:
+        if not msg and not verbose:
             msg = self.getMsg()
 
         BaseException.__init__(self, msg)
